@@ -1,4 +1,28 @@
+body{
+    margin:0px;
+}
+.header-cont {
+    width:100%;
+    position:fixed;
+    top:0px;
+}
+.header {
+    height:50px;
+    background:#F0F0F0;
+    width:960px;
+    margin:0px auto;
+}
+.content {
+    width:960px;
+    height: 2000px;
+    margin: 70px auto;
+}
+
 .form-control {
     font-size:28pt;
     height:86px;
+}
+
+.page {
+    height: 1000px;
 }

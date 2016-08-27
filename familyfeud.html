@@ -8,6 +8,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
+<header class="header-cont">
+    <div class="row">
+        <nav class="col-sm-12 text-right">
+            <a href="#submit">Submit</a>
+            <a href="#answer">Answer</a>
+            <p></p>
+        </nav>
+    </div>
+</header>
+
+<div id="submit" class="page">
 <section class="jumbotron">
     <div class="container">
         <div class="row text-center">
@@ -29,12 +40,15 @@
 <!-- submit button -->
 <div style="text-align: center">
     <button class="btn btn-default" ng-click="saveQuestion()">
-        Submit <span class="glyphicon glyphicon-ok"></span>
+        Submit Question <span class="glyphicon glyphicon-ok"></span>
     </button>
 </div>
 
 </body>
 
+</div>
+
+<div id="answer" class="page">
 <section class="jumbotron">
     <div class="container">
         <div class="row text-center">
@@ -46,12 +60,18 @@
 
 <body ng-app="ngTeam" ng-controller="surveyController">
 <h2>{{surveyQuestion}}</h2>
+<input type="text" class="form-control" id="surveyAnswer" ng-model="survey.answer">
+<br>
 <div style="text-align: center">
+    <button class="btn btn-default" >
+        Submit Answer <span class="glyphicon glyphicon-ok"></span>
+    </button>
     <button class="btn btn-default" ng-click="getAQuestion()">
         Load New Question <span class="glyphicon glyphicon-refresh"></span>
     </button>
 </div>
 </body>
+</div>
 
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js">
