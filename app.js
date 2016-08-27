@@ -1,0 +1,1 @@
+angular.module('ngTeam', ['ui.bootstrap']);
