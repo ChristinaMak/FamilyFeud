@@ -17,7 +17,7 @@ angular
 
             // use as key to enter data
             var entryKey = $scope.survey.question;
-            surveyRef.child(entryKey).set($scope.survey);
+            surveyRef.child(entryKey).set($scope.survey.question);
 
             // clear question field
             $scope.survey.question = "";

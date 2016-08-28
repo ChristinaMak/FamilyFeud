@@ -10,68 +10,73 @@
 </head>
 
 <header class="header-cont">
-    <div class="row">
-        <nav class="col-sm-12 text-right">
-            <a href="#submit">Submit</a>
-            <a href="#answer">Answer</a>
-            <p></p>
-        </nav>
+    <div class="container">
+        <div class="row">
+            <nav class="col-sm-12 text-right">
+                <a href="#submit">Submit</a>
+                <a href="#answer">Answer</a>
+                <p></p>
+            </nav>
+        </div>
     </div>
 </header>
 
 <div id="submit" class="page">
-<section class="jumbotron">
-    <div class="container">
-        <div class="row text-center">
-            <h1>Family Feud</h1>
-            <h2>Submit a Question</h2>
+    <section class="jumbotron">
+        <div class="container">
+            <div class="row text-center">
+                <h1>Family Feud</h1>
+                <h2>Submit a Question</h2>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<body ng-app="ngTeam" ng-controller="surveyController">
+    <body ng-app="ngTeam" ng-controller="surveyController">
 
-<!-- input text box for asking survey question -->
-<label class="sr-only" for="question">Question</label>
-<input type="text" class="form-control" id="question"
-       placeholder="Ask a survey question" ng-model="survey.question">
+    <section class="container">
+        <!-- input text box for asking survey question -->
+        <label class="sr-only" for="question">Question</label>
+        <input type="text" class="form-control" id="question"
+               placeholder="Ask a survey question" ng-model="survey.question">
 
-<br>
+        <br>
 
-<!-- submit button -->
-<div style="text-align: center">
-    <button class="btn btn-default" ng-click="saveQuestion()">
-        Submit Question <span class="glyphicon glyphicon-ok"></span>
-    </button>
-</div>
-
-</body>
+        <!-- submit button -->
+        <div style="text-align: center">
+            <button class="btn btn-primary" ng-click="saveQuestion()">
+                Submit Question <span class="glyphicon glyphicon-ok"></span>
+            </button>
+        </div>
+    </section>
+    </body>
 
 </div>
 
 <div id="answer" class="page">
-<section class="jumbotron">
-    <div class="container">
-        <div class="row text-center">
-            <h1>Family Feud</h1>
-            <h2>Answer a Question</h2>
+    <section class="jumbotron">
+        <div class="container">
+            <div class="row text-center">
+                <h1>Family Feud</h1>
+                <h2>Answer a Question</h2>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<body ng-app="ngTeam" ng-controller="surveyController">
-<h2>{{surveyQuestion}}</h2>
-<input type="text" class="form-control" id="response" ng-model="survey.response">
-<br>
-<div style="text-align: center">
-    <button class="btn btn-default" ng-click="saveResponse()">
-        Submit Answer <span class="glyphicon glyphicon-ok"></span>
-    </button>
-    <button class="btn btn-default" ng-click="getAQuestion()">
-        Load New Question <span class="glyphicon glyphicon-refresh"></span>
-    </button>
-</div>
-</body>
+    <body ng-app="ngTeam" ng-controller="surveyController">
+    <section class = "container">
+        <h2>{{surveyQuestion}}</h2>
+        <input type="text" class="form-control" id="response" ng-model="survey.response">
+        <br>
+        <div style="text-align: center">
+            <button class="btn btn-primary" ng-click="saveResponse()">
+                Submit Answer <span class="glyphicon glyphicon-ok"></span>
+            </button>
+            <button class="btn btn-default" ng-click="getAQuestion()">
+                Load New Question <span class="glyphicon glyphicon-refresh"></span>
+            </button>
+        </div>
+    </section>
+    </body>
 </div>
 
 <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
