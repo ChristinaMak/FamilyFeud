@@ -12,7 +12,7 @@ angular
         $scope.surveyDataSize = 0;
 
         $scope.saveQuestion = function() {
-            // create red to surveys table of database
+            // create ref to surveys table of database
             var surveyRef = $scope.myData.child("surveys");
 
             // use as key to enter data
@@ -23,7 +23,7 @@ angular
             $scope.survey.question = "";
         }
 
-        $scope.getAQuestion = function(dataSnapshot) {
+        $scope.getAQuestion = function() {
             var rand = Math.floor(Math.random() * $scope.surveyDataSize);
             var counter = 0;
             for (var key in $scope.surveyData) {
@@ -34,6 +34,14 @@ angular
             }
         }
 
+        $scope.saveResponse = function() {
+            var surveyRef = $scope.myData.child("surveys");
+            var entryKey = "responses"
+            surveyRef.child($scope.surveyQuestion).child(entryKey).push($scope.survey.response);
+
+            $scope.survey.response = "";
+            $scope.getAQuestion();
+        }
 
         /* Anonymous function acting as listener to detect database updates */
         $scope.allSurveyData.on('value', function (dataSnapshot) {
