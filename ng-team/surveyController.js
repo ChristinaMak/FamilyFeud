@@ -36,14 +36,15 @@ angular
 
         /* Saves input question to database */
         $scope.saveQuestion = function() {
-            $scope.survey.question = $scope.checkInput($scope.survey.question)
-
             // create ref to surveys table of database
             var surveyRef = $scope.myData.child("surveys");
 
-            // use as key to enter data
+            var question = $scope.survey.question;
+
+            $scope.survey.question = $scope.checkInput($scope.survey.question)
             var entryKey = $scope.survey.question;
             surveyRef.child(entryKey).set($scope.survey.question);
+            surveyRef.child(entryKey).child("question").set(question);
 
             // clear question field
             $scope.survey.question = "";
@@ -55,7 +56,7 @@ angular
             var counter = 0;
             for (var key in $scope.surveyData) {
                 if (counter === rand) {
-                    $scope.surveyQuestion = key;
+                    $scope.surveyQuestion = $scope.surveyData[key].question;
                 }
                 counter++;
             }
@@ -64,9 +65,9 @@ angular
         /* Saves input response to database */
         $scope.saveResponse = function() {
             var surveyRef = $scope.myData.child("surveys");
-            var entryKey = "responses"
-            surveyRef.child($scope.surveyQuestion).child(entryKey).push($scope.survey.response);
+            surveyRef.child($scope.surveyQuestion).child("responses").push($scope.survey.response);
 
+            // clear response form and get new question
             $scope.survey.response = "";
             $scope.getAQuestion();
         }
@@ -86,7 +87,7 @@ angular
             var counter = 0;
             for (var key in dataSnapshot.val()) {
                 if (counter === rand) {
-                    $scope.surveyQuestion = key;
+                    $scope.surveyQuestion = dataSnapshot.val()[key].question;
                 }
                 counter++;
             }
