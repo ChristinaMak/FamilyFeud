@@ -11,7 +11,33 @@ angular
         $scope.surveyQuestion = "";
         $scope.surveyDataSize = 0;
 
+        /* Checks input for characters not allowed in Firebase key */
+        $scope.checkInput = function(input) {
+            var cleanedKey = input;
+
+            while (cleanedKey.indexOf(".") !== -1 ) {
+                cleanedKey = cleanedKey.replace('.','');
+            }
+            while (cleanedKey.indexOf("#") !== -1) {
+                cleanedKey = cleanedKey.replace('#','');
+            }
+            while (cleanedKey.indexOf("$") !== -1) {
+                cleanedKey = cleanedKey.replace('$','');
+            }
+            while (cleanedKey.indexOf("[") !== -1) {
+                cleanedKey = cleanedKey.replace('[','');
+            }
+            while (cleanedKey.indexOf("]") !== -1) {
+                cleanedKey = cleanedKey.replace(']','');
+            }
+
+            return cleanedKey;
+        }
+
+        /* Saves input question to database */
         $scope.saveQuestion = function() {
+            $scope.survey.question = $scope.checkInput($scope.survey.question)
+
             // create ref to surveys table of database
             var surveyRef = $scope.myData.child("surveys");
 
@@ -23,6 +49,7 @@ angular
             $scope.survey.question = "";
         }
 
+        /* Retrieves a random question from the database */
         $scope.getAQuestion = function() {
             var rand = Math.floor(Math.random() * $scope.surveyDataSize);
             var counter = 0;
@@ -34,6 +61,7 @@ angular
             }
         }
 
+        /* Saves input response to database */
         $scope.saveResponse = function() {
             var surveyRef = $scope.myData.child("surveys");
             var entryKey = "responses"
