@@ -1,14 +1,21 @@
 angular
     .module('ngTeam')
     .controller('surveyController', function ($scope, $timeout) {
+        var config = {
+            apiKey: "AIzaSyBuisL8xrUulT28TEY0CDmDk2VMR5iHurY",
+            authDomain: "family-feud-86a21.firebaseapp.com",
+            databaseURL: "https://family-feud-86a21.firebaseio.com"
+        };
 
-        $scope.myData = new Firebase("https://family-feud-86a21.firebaseio.com");
-        $scope.allSurveyData =
-            new Firebase("https://family-feud-86a21.firebaseio.com/surveys/");
+        firebase.initializeApp(config);
+
+        $scope.myData = firebase.database().ref();
+        $scope.allSurveyData = firebase.database().ref().child('surveys');
 
         $scope.survey = {};
         $scope.surveyData = {};
         $scope.surveyQuestion = "";
+        $scope.surveyKey = "";
         $scope.surveyDataSize = 0;
 
         /* Checks input for characters not allowed in Firebase key */
@@ -56,6 +63,7 @@ angular
             var counter = 0;
             for (var key in $scope.surveyData) {
                 if (counter === rand) {
+                    $scope.surveyKey = key;
                     $scope.surveyQuestion = $scope.surveyData[key].question;
                 }
                 counter++;
@@ -65,7 +73,7 @@ angular
         /* Saves input response to database */
         $scope.saveResponse = function() {
             var surveyRef = $scope.myData.child("surveys");
-            surveyRef.child($scope.surveyQuestion).child("responses").push($scope.survey.response);
+            surveyRef.child($scope.surveyKey).child("responses").push($scope.survey.response);
 
             // clear response form and get new question
             $scope.survey.response = "";
@@ -87,6 +95,7 @@ angular
             var counter = 0;
             for (var key in dataSnapshot.val()) {
                 if (counter === rand) {
+                    $scope.surveyKey = key;
                     $scope.surveyQuestion = dataSnapshot.val()[key].question;
                 }
                 counter++;
